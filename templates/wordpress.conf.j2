@@ -47,12 +47,9 @@ server {
      listen 20000;
 
      location / {
-     #   rewrite ^/django/(.+)$  /$1;
-    #   rewrite ^/django(.*)$ $1;
         rewrite ^/django$ /;
         rewrite ^/django(.*)$ $1;
-        #include uwsgi_params;
-        proxy_pass http://127.0.0.1:8500;
+        proxy_pass http://{{ ansible_default_ipv4.address }}:8500;
     }
 }
 
