@@ -1,3 +1,8 @@
+
+upstream django {
+    server 127.0.0.1:8500; 
+}
+
 server {
         listen 80 default_server;
         listen [::]:80 default_server ipv6only=on;
@@ -26,4 +31,9 @@ server {
                 fastcgi_index index.php;
                 include fastcgi_params;
         }
+
+
+  location / {
+        uwsgi_pass  django;
+    }
 }
